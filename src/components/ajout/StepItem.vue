@@ -1,14 +1,16 @@
 <template>
+<div id="step-item">
     <div @click="setStep" v-bind:class=" 'stepItem '+className">
         <span>  {{tKey}}</span>
-        
-    
     </div>
+    <span>{{name}}</span>
+</div>
+    
 </template>
 <script>
 export default {
     name:"StepItem",
-    props:["tKey","stepNumber", "setStep"],
+    props:["tKey","stepNumber", "setStep","name"],
     computed:{
         className:function(){
             if(this.stepNumber>=this.tKey){
@@ -41,5 +43,10 @@ export default {
     background: lightgray;
      border: 2px solid lightgray;
     
+}
+#step-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 </style>

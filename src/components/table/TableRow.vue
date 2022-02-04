@@ -1,5 +1,5 @@
 <template>
-  <div id="table-row">
+  <div id="table-row" v-bind:class="removedStyle">
     
       <div class="row-header">
         <div v-bind:style="'background:url('+this.img+') no-repeat center; background-size: cover'" class="img-car"></div>
@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="action-container">
-          <button @click="deleteCar" class="btn-delete">
+          <button @click="remove" class="btn-delete">
             <img src="../../assets/supprimer.png" alt="" />
           </button>
           <button @click="copyCar" ckass="btn-copy">
@@ -40,20 +40,50 @@ export default {
           color:this.car.couleur,
           tagList:this.car.tags,
           img:this.car.image_voiture,
+          removed:false,
       }
   },
+  computed:{
+    removedStyle:function(){
+      if(this.removed) return "removed"
+      else return "normal"
+    }
+  },
+  methods:{
+    remove(){
+      this.removed=true;
+      this.sleep(300).then(() => {this.deleteCar() }); //on attend 500ms (le temps que l'animation de suppression se joue et on supprime de la liste)
+      
+    },
+
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+  }
  
 };
 
 </script>
 
 <style scoped>
+.normal{
+  max-height: 96px;
+}
+.removed{
+  max-height: 0px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  
+
+}
 .name-car {
   font-size: 25px;
   font-weight: 600;
   margin-bottom: 5px;
 }
 #table-row {
+  
+ transition: max-height 0.3s;
   width: 100%;
   background: white;
   display: flex;
@@ -74,9 +104,15 @@ button {
   width: 20px;
   margin-right: 20px;
 }
+button:hover >img{
+  background: #F5F6F9;
+  transition: background 0.3s;
+}
 button img {
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .row-header {

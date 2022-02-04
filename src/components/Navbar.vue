@@ -93,7 +93,7 @@ ol {
 .link {
   display: flex;
   align-items: center;
-  color: black;
+  color:#222455;
   text-decoration: none;
 }
 .link > * {
@@ -108,7 +108,7 @@ ol {
 }
 #btn-linkedin {
   background: whitesmoke;
-  padding: 5px 20px 5px 20px;
+  padding: 0px 20px 0px 20px;
   border-radius: 10px;
   color: #ffa502;
 

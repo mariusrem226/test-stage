@@ -5,12 +5,14 @@
       <StepBar v-bind:setStep="setStep" v-bind:stepNumber="step" />
       <div class="form">
         <input
+          v-bind:class="errorStyle"
           v-model="nameValue"
           v-if="step === 1"
           placeholder="Nom de la voiture"
           type="text"
           name="carName"
           id="inpt-name"
+          ref="inpt-name"
         />
         <textarea
           v-else-if="step === 2"
@@ -25,16 +27,17 @@
           v-model="tagValue"
           v-else-if="step === 3"
           type="text"
-          placeholder="tag1, tag2, ..."
+          placeholder="tag1, tag2, ... (séparés par une virgule)"
           name="carTag"
           id="inpt-tag"
+          
         />
-          <p>
+          <p id="error-container">
             <span v-show="error" id="error-msg"
               >Veuillez renseigner un nom de voiture pour continuer</span
             >
           </p>
-          <div id="tags-container" v-show="step === 3">
+          <div id="tags-container" >
             <TagItem
               v-for="tag in tagsList"
               v-bind:key="tag"
@@ -76,9 +79,13 @@ export default {
   },
   computed: {
     tagsList: function () {
-      var list = this.tagValue.split(",");
+      var list = this.tagValue.trim().split(",");
       return list;
     },
+    errorStyle:function(){
+      if(this.error) return "error-effect" ;
+      else return "";
+    }
   },
   methods: {
     next() {
@@ -117,6 +124,27 @@ export default {
 </script>
 
 <style scoped>
+.error-effect{
+  animation: 0.3s shake;
+}
+ @keyframes shake {
+   0%{
+      transform: translateX(0px) ;
+
+   }
+   25%{
+     transform: translateX(10px) ;
+   }
+   50%{
+     transform: translateX(-10px) ;
+   }
+   75%{
+     transform: translateX(10px) ;
+   }
+
+ }
+
+
 h1 {
   border-radius: 50px;
   padding: 30px 20px 0px 20px;
@@ -126,6 +154,9 @@ h1 {
   color: red;
   text-align: center;
 }
+#error-container{
+  min-height:20px;
+}
 #addPageContainer {
   width: 100%;
   height: 100%;
@@ -134,7 +165,7 @@ h1 {
 }
 .add-form-container {
   box-shadow: 3px 3px 3px rgb(231, 231, 231), -3px 3px 3px rgb(231, 231, 231);
-  border-radius: 5px;
+  border-radius: 30px;
 
   background: white;
   display: flex;
@@ -144,6 +175,7 @@ h1 {
   height: 400px;
   margin: 30px;
 }
+
 .form {
   display: flex;
   flex-direction: column;

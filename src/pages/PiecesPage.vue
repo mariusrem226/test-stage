@@ -1,6 +1,6 @@
 <template>
   <div id="piece-page-container">
-    <h1>Les pièces auto</h1>
+    <h4>Les pièces techniques</h4>
 
     <div id="pieces-container">
       <PieceItem v-for="piece in listePieces" :piece="piece" :key="piece.id" />
@@ -36,8 +36,8 @@ export default {
 <style scope >
 #piece-page-container {
   background: white;
-  margin: 10px;
-  padding: 5px;
+  margin: 20px;
+  padding: 0px;
   border-radius: 5px;
   width: 100%;
 }
@@ -45,5 +45,12 @@ export default {
 #pieces-container {
   display: flex;
   flex-wrap: wrap;
+  border-top:2px #F5F6F9 solid;
+  
+}
+h4{
+  padding: 10px;
+  margin: 0;
+  color:#222455;
 }
 </style>

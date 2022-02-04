@@ -1,6 +1,6 @@
 <template>
     <div id="stepBar">
-        <StepItem   :setStep="setStep.bind(null ,index)" v-for="index in nb" v-bind:stepNumber="stepNumber" v-bind:tKey="index" v-bind:key="index"/>
+        <StepItem    v-for="step in stepList" :setStep="setStep.bind(null ,step.nb)" :name="step.name" :stepNumber="stepNumber" :tKey="step.nb" :key="step.nb"/>
     </div>
 </template>
 <script>
@@ -12,8 +12,24 @@ export default {
     props:["stepNumber", "setStep"],
     data(){
         return{
-            nb:3,
-        }
+            stepList:[
+                {   
+                    "nb":1,
+                    "name":"Nom", 
+                },
+                {   
+                    "nb":2,
+                    "name":"Description", 
+                },
+                {   
+                    "nb":3,
+                    "name":"Tags", 
+                },
+            ]
+                
+
+            }
+        
     },
     methods:{
         test(){
