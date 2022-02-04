@@ -5,14 +5,14 @@
       <StepBar v-bind:setStep="setStep" v-bind:stepNumber="step" />
       <div class="form">
         <input
-          v-bind:class="errorStyle"
+          @keypress.enter="next"
           v-model="nameValue"
           v-if="step === 1"
           placeholder="Nom de la voiture"
           type="text"
           name="carName"
           id="inpt-name"
-          ref="inpt-name"
+          ref="inptName"
         />
         <textarea
           v-else-if="step === 2"
@@ -24,6 +24,7 @@
         >
         </textarea>
         <input
+        @keypress.enter="valid"
           v-model="tagValue"
           v-else-if="step === 3"
           type="text"
@@ -82,20 +83,11 @@ export default {
       var list = this.tagValue.trim().split(",");
       return list;
     },
-    errorStyle:function(){
-      if(this.error) return "error-effect" ;
-      else return "";
-    }
+   
   },
   methods: {
-    next() {
-      if (this.nameValue !== "") {
-        this.step++;
-        this.error = false;
-      } else {
-        this.error = true;
-        console.log(this.error);
-      }
+    next() {  
+       this.setStep(this.step+1)
     },
     valid() {
       router.push({
@@ -111,13 +103,21 @@ export default {
       console.log(this.nameValue, this.descValue, this.tagsList);
     },
     setStep(nb) {
-      if (this.nameValue !== "") {
+      if (this.nameValue.trim() !== "") {
         this.step = nb;
         this.error = false;
       } else {
+        const inpt=this.$refs.inptName;
+       
+        this.shake(inpt)
         this.error = true;
       }
     },
+    shake(elm){
+      elm.classList.remove("error-effect");
+      void elm.offsetWidth;
+      elm.classList.add("error-effect");
+    }
   },
   components: { StepBar, TagItem },
 };
@@ -195,8 +195,7 @@ button:hover {
   background: #ffa502;
   color: white;
 }
-button:disabled {
-}
+
 button:disabled:hover {
   border: solid 1px #ffa502;
   background: transparent;
