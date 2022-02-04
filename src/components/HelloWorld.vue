@@ -89,6 +89,12 @@
 <script>
 import TestPresentationTest from "./TestPresentationTest";
 export default {
+  mounted() {
+    document.getElementById("link-home").classList.add("selected");
+  }, //quand le composant est monté on "decore" le lien correspondant dans la navBar (ici "Accueil")
+  beforeDestroy() {
+    document.getElementById("link-home").classList.remove("selected");
+  }, //quand le composant est detruit on retire la "déciration" du lien correspondant dans la navBar (ici "Accueil")
   name: 'HelloWorld',
   components: {TestPresentationTest},
   data () {
