@@ -15,11 +15,8 @@
           </button>
           <button @click="copyCar" ckass="btn-copy">
             <img src="../../assets/copier.png" alt="" />
-          </button>
-        
+          </button>       
       </div>
-
-    
     </div>
 
     <div class="tags-container">
@@ -29,7 +26,7 @@
 </template>
 <script>
 import ColorItem from "./ColorItem.vue";
-import TagItem from "../TagItem.vue";
+import TagItem from "../tag/TagItem.vue";
 
 export default {
   name: "TableRow",
@@ -44,6 +41,7 @@ export default {
       }
   },
   computed:{
+//cette variable calculée varie selon que l'utilisateur souhaite supprimer (variable removed) ou non la voiture de la liste et servira de nom de classe (pour l'animation de supression)
     removedStyle:function(){
       if(this.removed) return "removed"
       else return "normal"
@@ -52,11 +50,11 @@ export default {
   methods:{
     remove(){
       this.removed=true;
-      this.sleep(300).then(() => {this.deleteCar() }); //on attend 500ms (le temps que l'animation de suppression se joue et on supprime de la liste)
+      this.sleep(300).then(() => {this.deleteCar() }); //on attend 300ms (le temps que l'animation de suppression se joue et on supprime de la liste)
       
     },
 
-    sleep(ms) {
+    sleep(ms) {//fonction d'attente, on passe le temps d'attente en parametre (en ms)
       return new Promise(resolve => setTimeout(resolve, ms));
     }
   }

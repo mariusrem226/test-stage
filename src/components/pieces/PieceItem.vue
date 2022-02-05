@@ -23,7 +23,7 @@ data(){
     }
 },
 methods:{
-    toggleModale(){
+    toggleModale(){//fonction d'affichage/fermeture de la fenetre flottante avec les infos de la piece
         this.reveleModale=!this.reveleModale;
     }
 },

@@ -1,8 +1,10 @@
 require('./listCars.js');
-function getCars(){
+//dans ce script on place toutes les fontions qui interagissent directement avec les données
+
+function getCars(){//fonction qui fournit la liste des voitures
     return listCars;
 }
-function getPieces() {
+function getPieces() {//fonction qui fournit la liste des objets pieces (contenant la liste des voitures équipées)
     var listePieces = [];
 
     listCars.forEach(car => {

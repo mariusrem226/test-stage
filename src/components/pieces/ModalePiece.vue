@@ -20,14 +20,12 @@ export default {
 
     name:'ModalePiece',
     props:[
-      "revele", "toggleModale", "piece"
-
-    ],
-    methods:{
-      toggleModale1(){
-        console.log("blabla");
-      }
-    }
+      "revele", "toggleModale", "piece"],
+      // les props sont 
+      // la variable revele (qui sert pour l'affichage/la fermeture)
+      // la fonction d'affichage/fermeture
+      // l'objet pièce concerné
+  
 };
 </script>
 

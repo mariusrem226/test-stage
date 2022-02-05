@@ -3,22 +3,18 @@
     <div class="car-card">
       <h1>{{ car.name }}</h1>
       <p>{{ car.description }}</p>
-      <div class="item-container">
-        <TagItem v-for="tag in car.tags" v-bind:name="tag" v-bind:key="tag" />
-      </div>
+     <TagsContainer :tagsList="car.tags"/>
     </div>
   </div>
 </template>
 
 <script>
-import TagItem from "../components/TagItem.vue";
+import TagsContainer from "../components/tag/TagsContainer.vue";
 export default {
-  mounted() {
-    console.log(this.car);
-  },
+  
   name: "NewCarPage",
   props: ["car"],
-  components: { TagItem },
+  components: { TagsContainer },
 };
 </script>
 

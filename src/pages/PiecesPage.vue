@@ -10,7 +10,7 @@
 
 <script>
 import PieceItem from "../components/pieces/PieceItem.vue";
-import { getPieces } from "../model/carsAPI";
+import { getPieces } from "../model/carsAPI";//on importe la fonction qui permettra de recupérer la liste des pièces
 
 export default {
   mounted() {//quand le composant est monté on "decore" le lien correspondant dans la navBar (ici "les pièces")
@@ -25,7 +25,7 @@ export default {
   components: { PieceItem },
   data() {
     return {
-      listePieces: getPieces(),
+      listePieces: getPieces(),//on récupère la liste des pièces
     };
   },
 };

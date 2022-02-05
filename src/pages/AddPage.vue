@@ -31,20 +31,13 @@
           placeholder="tag1, tag2, ... (séparés par une virgule)"
           name="carTag"
           id="inpt-tag"
-          
         />
           <p id="error-container">
             <span v-show="error" id="error-msg"
               >Veuillez renseigner un nom de voiture pour continuer</span
             >
           </p>
-          <div id="tags-container" >
-            <TagItem
-              v-for="tag in tagsList"
-              v-bind:key="tag"
-              v-bind:name="tag"
-            />
-          </div>
+         <TagsContainer :tagsList="tagsList"/>
       
       </div>
       <button id="btn-suivant" v-if="step < 3" @click="next">suivant</button>
@@ -55,16 +48,16 @@
 
 <script>
 import StepBar from "../components/ajout/StepBar.vue";
-import TagItem from "../components/TagItem.vue";
+import TagsContainer from "../components/tag/TagsContainer.vue";
 import router from "../router/index.js";
 
 export default {
   mounted() {
-    //quand le composant est monté on "decore" le lien correspondant dans la navBar (ici "les pièces")
+    //quand le composant est monté on "decore" le lien correspondant dans la navBar (ici "Ajout voiture")
     document.getElementById("link-add").classList.add("selected");
   },
   beforeDestroy() {
-    //quand le composant est detruit on retire la "décoration" du lien correspondant dans la navBar (ici "les pièces")
+    //quand le composant est detruit on retire la "décoration" du lien correspondant dans la navBar (ici "Ajout voiture")
     document.getElementById("link-add").classList.remove("selected");
   },
 
@@ -75,11 +68,11 @@ export default {
       tagValue: "",
       descValue: "",
       step: 1,
-      error: false,
+      error: false,//boolean qui sert à l'affichage ou non du message d'erreur
     };
   },
   computed: {
-    tagsList: function () {
+    tagsList: function () {//la liste des tags qui se met a jour en direct
       var list = this.tagValue.trim().split(",");
       return list;
     },
@@ -89,8 +82,8 @@ export default {
     next() {  
        this.setStep(this.step+1)
     },
-    valid() {
-      router.push({
+    valid() {//fonction de validation du formulaire
+      router.push({//on redirige vers la page d'affichage des infos à laquelle on y passe un objet "car" 
         name: "newCar",
         params: {
           car: {
@@ -100,26 +93,25 @@ export default {
           },
         },
       });
-      console.log(this.nameValue, this.descValue, this.tagsList);
+      
     },
     setStep(nb) {
       if (this.nameValue.trim() !== "") {
         this.step = nb;
         this.error = false;
       } else {
-        const inpt=this.$refs.inptName;
-       
-        this.shake(inpt)
+        const inpt=this.$refs.inptName;//on recupere l'input du nom
+        this.shake(inpt)//on applique l'effet de secousse sur l'input
         this.error = true;
       }
     },
-    shake(elm){
+    shake(elm){//fonction qui provoque l'effet de "secousse" 
       elm.classList.remove("error-effect");
       void elm.offsetWidth;
       elm.classList.add("error-effect");
     }
   },
-  components: { StepBar, TagItem },
+  components: { StepBar, TagsContainer},
 };
 </script>
 
@@ -201,13 +193,7 @@ button:disabled:hover {
   background: transparent;
   color: #ffa502;
 }
-#tags-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-height: 40px;
-}
+
 input:focus,
 textarea:focus {
   outline: none;

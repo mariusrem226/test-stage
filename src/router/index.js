@@ -17,6 +17,11 @@ export default new Router({
       component: HelloWorld
     },
     {
+      path: '/home',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
       path: '/table',
       name: 'table',
       component: TablePage
@@ -27,7 +32,7 @@ export default new Router({
       component: PiecesPage
     },
     {
-      path: '/ajout',
+      path: '/add',
       name: 'ajout',
       component: AddPage
     },
