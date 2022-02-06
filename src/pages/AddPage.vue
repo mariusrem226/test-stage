@@ -178,10 +178,12 @@ h1 {
 }
 button {
   border: solid 1px #ffa502;
-  background: transparent;
+
   color: #ffa502;
   padding: 4px 12px 4px 12px;
   border-radius: 30px;
+  background: transparent;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 button:hover {
   background: #ffa502;

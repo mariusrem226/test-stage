@@ -40,9 +40,17 @@ export default {
         height: 43px;
     }
     #img-nav-btn{
+        padding: 5px;
         margin-bottom:-5px ;
-        height:13px;
+        height:25px;
         cursor: pointer;
+        border-radius: 5px;
+        background:transparent ;
+        transition: background 0.3s ease-in-out;
+    }
+    #img-nav-btn:hover{
+         background:#F5F6F9;
+         
     }
     
 </style>
